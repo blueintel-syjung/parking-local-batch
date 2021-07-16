@@ -1,0 +1,103 @@
+spring:
+  profiles:
+    active: local
+
+server:
+  port: 11090
+
+mybatis:
+  mapper-locations: mappers/**/*.xml
+  type-aliases-package: com.blueparking.batch.domain
+packege-name:
+  base: com.blueparking.batch
+
+---
+spring:
+  profiles: local
+  db:
+    host: localhost
+    port: 3306
+  datasource:
+    hikari:
+      username: user_batch
+      password: elwlxjffh31!@
+      #      driver-class-name: org.mariadb.jdbc.Driver
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      max-lifetime: 1797000
+      connection-timeout: 10000
+      validation-timeout: 5000
+      minimum-idle: 3
+      maximum-pool-size: 3
+      #        idle-timeout: 1497000
+      isolate-internal-queries: false
+      auto-commit: true
+      read-only: false
+      leak-detection-threshold: 10000
+      jdbc-url: jdbc:log4jdbc:mariadb://${spring.db.host}:${spring.db.port}/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true
+
+  liquibase:
+    change-log: classpath:/db/changelog-master.xml
+    drop-first: false
+    enabled: true
+
+logging:
+  file:
+    name: ./log/log_info.tem
+    max-size: 50MB
+    max-history: 7
+
+  level:
+    root: info
+    com.zaxxer.hikari.HikariDataSource: ERROR
+    jdbc:
+      connection: OFF
+      sqlonly: OFF
+      sqltiming: ERROR
+      audit: OFF
+      resultset: OFF
+      resultsettable: OFF
+---
+spring:
+  profiles: dev
+  db:
+    host: 121.140.92.209
+    port: 7707
+  datasource:
+    hikari:
+      username: user_batch
+      password: elwlxjffh31!@
+      #      driver-class-name: org.mariadb.jdbc.Driver
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      max-lifetime: 1797000
+      connection-timeout: 10000
+      validation-timeout: 5000
+      minimum-idle: 3
+      maximum-pool-size: 3
+      #        idle-timeout: 1497000
+      isolate-internal-queries: false
+      auto-commit: true
+      read-only: false
+      leak-detection-threshold: 10000
+      jdbc-url: jdbc:log4jdbc:mariadb://${spring.db.host}:${spring.db.port}/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true
+
+  liquibase:
+    change-log: classpath:/db/changelog-master.xml
+    drop-first: false
+    enabled: true
+
+logging:
+  file:
+    name: ./log/log_info.tem
+    max-size: 50MB
+    max-history: 7
+
+  level:
+    root: info
+    com.zaxxer.hikari.HikariDataSource: ERROR
+    jdbc:
+      connection: OFF
+      sqlonly: OFF
+      sqltiming: ERROR
+      audit: OFF
+      resultset: OFF
+      resultsettable: OFF

@@ -1,0 +1,87 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id "org.liquibase.gradle" version "2.0.4"
+    id 'maven-publish'
+}
+
+group 'com.blueparking.batch'
+version '0.0.1'
+sourceCompatibility = 8
+targetCompatibility = 8
+
+configurations {
+    liquibase
+}
+
+liquibase {
+    activities {
+        main {
+
+            changeLogFile 'db/changelog-master.xml'
+            url "jdbc:mariadb://localhost:3306/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
+            username "user_batch"
+            password "elwlxjffh31!@"
+            driver "org.mariadb.jdbc.Driver"
+            referenceUrl "jdbc:mariadb://localhost:3306/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
+            referenceUsername "user_batch"
+            referencePassword "elwlxjffh31!@"
+            referenceDriver "org.mariadb.jdbc.Driverr"
+        }
+        runList = 'main'
+    }
+}
+
+def nexusUrl="http://121.140.92.209:8081"
+def nexusUsername='admin'
+def nexusPassword='elwlxjffh31!@'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact bootJar // Publish the output of the sourceJar task
+        }
+    }
+    repositories {
+        maven {
+            credentials{
+                username="${nexusUsername}"
+                password="${nexusPassword}"
+            }
+            url = "${nexusUrl}/repository/parking-local-batch/"
+            allowInsecureProtocol = true
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.5.0'
+    implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.0'
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'com.h2database:h2'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.liquibase:liquibase-core:4.3.5'
+
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.3.5'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
+    liquibaseRuntime 'org.mariadb.jdbc:mariadb-java-client'
+    liquibaseRuntime sourceSets.main.output
+
+}
+
+test {
+    useJUnitPlatform()
+}

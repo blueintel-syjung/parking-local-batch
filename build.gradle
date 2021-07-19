@@ -85,3 +85,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.jar {
+    enabled = false
+}
+
+tasks.bootJar {
+    enabled = true
+}

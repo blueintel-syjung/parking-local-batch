@@ -14,26 +14,24 @@ packege-name:
 ---
 spring:
   profiles: local
+  main:
+    allow-bean-definition-overriding: true
   db:
     host: localhost
-    port: 3306
+    port: 7707
   datasource:
-    hikari:
-      username: user_batch
-      password: elwlxjffh31!@
-      #      driver-class-name: org.mariadb.jdbc.Driver
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      max-lifetime: 1797000
-      connection-timeout: 10000
-      validation-timeout: 5000
-      minimum-idle: 3
-      maximum-pool-size: 3
-      #        idle-timeout: 1497000
-      isolate-internal-queries: false
-      auto-commit: true
-      read-only: false
-      leak-detection-threshold: 10000
-      jdbc-url: jdbc:log4jdbc:mariadb://${spring.db.host}:${spring.db.port}/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true
+    url: jdbc:mariadb://${spring.db.host}:${spring.db.port}/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true
+    username: user_batch
+    password: elwlxjffh31!@
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
 
   liquibase:
     change-log: classpath:/db/changelog-master.xml
@@ -42,7 +40,7 @@ spring:
 
 logging:
   file:
-    name: ./log/log_info.tem
+    name: ./log/batch_controller_info.tem
     max-size: 50MB
     max-history: 7
 

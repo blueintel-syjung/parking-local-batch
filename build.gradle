@@ -20,11 +20,11 @@ liquibase {
         main {
 
             changeLogFile 'db/changelog-master.xml'
-            url "jdbc:mariadb://localhost:3306/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
+            url "jdbc:mariadb://localhost:7707/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
             username "user_batch"
             password "elwlxjffh31!@"
             driver "org.mariadb.jdbc.Driver"
-            referenceUrl "jdbc:mariadb://localhost:3306/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
+            referenceUrl "jdbc:mariadb://localhost:7707/blueintel_batch?characterEncoding=UTF-8&allowMultiQueries=true"
             referenceUsername "user_batch"
             referencePassword "elwlxjffh31!@"
             referenceDriver "org.mariadb.jdbc.Driverr"
@@ -33,7 +33,7 @@ liquibase {
     }
 }
 
-def nexusUrl="http://121.140.92.209:8081"
+def nexusUrl="http://192.168.1.200:8081"
 def nexusUsername='admin'
 def nexusPassword='elwlxjffh31!@'
 

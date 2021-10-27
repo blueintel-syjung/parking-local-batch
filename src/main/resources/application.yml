@@ -40,7 +40,7 @@ spring:
 
 logging:
   file:
-    name: ./log/batch_controller_info.tem
+    name: C:/BlueParking/log/batch_controller_info.tem
     max-size: 50MB
     max-history: 7
 

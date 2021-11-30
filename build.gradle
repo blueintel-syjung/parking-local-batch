@@ -33,7 +33,7 @@ liquibase {
     }
 }
 
-def nexusUrl="http://192.168.1.200:8081"
+def nexusUrl="http://13.125.112.0:8081"
 def nexusUsername='admin'
 def nexusPassword='elwlxjffh31!@'
 

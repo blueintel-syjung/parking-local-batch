@@ -49,7 +49,7 @@ publishing {
                 username="${nexusUsername}"
                 password="${nexusPassword}"
             }
-            url = "${nexusUrl}/repository/parking-local-batch/"
+            url = "${nexusUrl}/repository/stage-parking-local-batch/"
             allowInsecureProtocol = true
         }
     }

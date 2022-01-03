@@ -48,4 +48,4 @@ parking-local-rest-controller
 <br/>
 ~~취소 예시~~
 
-브랜치 master 원복 
+브랜치 생성
